@@ -1,7 +1,7 @@
 <html lang="es">
 <head>
 	<meta name='layout' content='main'/>
-	<title><g:message code="springSecurity.login.title"/></title>
+	<title>Iniciar Sesión</title>
 	<style type='text/css' media='screen'>
 	#login {
 		margin: 15px 0px;
@@ -87,7 +87,7 @@
 <body>
 <div id='login'>
 	<div class='inner'>
-		<div class='fheader'>Login</div>
+		<div class='fheader'>Iniciar Sesión</div>
 
 		<g:if test='${flash.message}'>
 			<div class='login_message'>${flash.message}</div>
@@ -106,11 +106,11 @@
 
 			<p id="remember_me_holder">
 				<input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
-				<label for='remember_me'><g:message code="springSecurity.login.remember.me.label"/></label>
+				<label for='remember_me'>Recordarme</label>
 			</p>
 
 			<p>
-				<input type='submit' id="submit" value='${message(code: "springSecurity.login.button")}'/>
+				<input type='submit' id="submit" value='Login'/>
 			</p>
 		</form>
 	</div>
