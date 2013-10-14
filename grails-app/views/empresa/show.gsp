@@ -17,13 +17,13 @@
 			</ul>
 		</div>
 		<div id="show-empresa" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1>${empresaInstance?.nombre}</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list empresa">
 			
-				<g:if test="${empresaInstance?.nombre}">
+				<!--<g:if test="${empresaInstance?.nombre}">
 				<li class="fieldcontain">
 					<span id="nombre-label" class="property-label"><g:message code="empresa.nombre.label" default="Nombre" /></span>
 					
@@ -31,10 +31,10 @@
 					
 				</li>
 				</g:if>
-			
+			-->
 				<g:if test="${empresaInstance?.domicilio}">
 				<li class="fieldcontain">
-					<span id="domicilio-label" class="property-label"><g:message code="empresa.domicilio.label" default="Domicilio" /></span>
+                                  <h4><span id="domicilio-label" class="property-label"><g:message code="empresa.domicilio.label" default="Domicilio" /></span></h4>
 					
 						<span class="property-value" aria-labelledby="domicilio-label"><g:fieldValue bean="${empresaInstance}" field="domicilio"/></span>
 					
@@ -135,34 +135,34 @@
 				<li class="fieldcontain">
 					<span id="afiliado-label" class="property-label"><g:message code="empresa.afiliado.label" default="Afiliado" /></span>
 					
-						<span class="property-value" aria-labelledby="afiliado-label"><g:formatBoolean boolean="${empresaInstance?.afiliado}" /></span>
+						<span class="property-value" aria-labelledby="afiliado-label"><g:formatBoolean boolean="${empresaInstance?.afiliado}" true="Si" false="No"/></span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${empresaInstance?.contrato_aiag}">
 				<li class="fieldcontain">
-					<span id="contrato_aiag-label" class="property-label"><g:message code="empresa.contrato_aiag.label" default="Contratoaiag" /></span>
+					<span id="contrato_aiag-label" class="property-label"><g:message code="empresa.contrato_aiag.label" default="Contrato AIAG" /></span>
 					
-						<span class="property-value" aria-labelledby="contrato_aiag-label"><g:formatBoolean boolean="${empresaInstance?.contrato_aiag}" /></span>
+						<span class="property-value" aria-labelledby="contrato_aiag-label"><g:formatBoolean boolean="${empresaInstance?.contrato_aiag}" true="Si" false="No"/></span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${empresaInstance?.contrato_colectivo}">
 				<li class="fieldcontain">
-					<span id="contrato_colectivo-label" class="property-label"><g:message code="empresa.contrato_colectivo.label" default="Contratocolectivo" /></span>
+					<span id="contrato_colectivo-label" class="property-label"><g:message code="empresa.contrato_colectivo.label" default="Contrato Colectivo" /></span>
 					
-						<span class="property-value" aria-labelledby="contrato_colectivo-label"><g:formatBoolean boolean="${empresaInstance?.contrato_colectivo}" /></span>
+						<span class="property-value" aria-labelledby="contrato_colectivo-label"><g:formatBoolean boolean="${empresaInstance?.contrato_colectivo}" true="Si" false="No"/></span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${empresaInstance?.contrato_propio}">
 				<li class="fieldcontain">
-					<span id="contrato_propio-label" class="property-label"><g:message code="empresa.contrato_propio.label" default="Contratopropio" /></span>
+					<span id="contrato_propio-label" class="property-label"><g:message code="empresa.contrato_propio.label" default="Contrato Propio" /></span>
 					
-						<span class="property-value" aria-labelledby="contrato_propio-label"><g:formatBoolean boolean="${empresaInstance?.contrato_propio}" /></span>
+						<span class="property-value" aria-labelledby="contrato_propio-label"><g:formatBoolean boolean="${empresaInstance?.contrato_propio}" true="Si" false="No"/></span>
 					
 				</li>
 				</g:if>

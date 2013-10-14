@@ -5,7 +5,7 @@ import aiag.Producto
 import aiag.Empresa
 import grails.plugins.springsecurity.Secured
 
-@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'])
+@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
 class ProduccionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

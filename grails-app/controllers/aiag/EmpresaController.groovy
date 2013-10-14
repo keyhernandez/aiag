@@ -19,7 +19,7 @@ class EmpresaController {
 
     
 
-    @Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'])
+    @Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY','ROLE_SUPERADMIN'])
     def create() {
         [empresaInstance: new Empresa(params)]
     }

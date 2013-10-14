@@ -1,7 +1,9 @@
 package aiag
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
 class TipoEmpresaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
