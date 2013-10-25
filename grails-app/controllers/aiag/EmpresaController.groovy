@@ -2,7 +2,8 @@ package aiag
 
 import org.springframework.dao.DataIntegrityViolationException
 import grails.plugins.springsecurity.Secured
-
+import aiag.Persona
+import aiag.PersonaController
 
 class EmpresaController {
 
@@ -19,7 +20,7 @@ class EmpresaController {
 
     
 
-    @Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY','ROLE_SUPERADMIN'])
+    @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
     def create() {
         [empresaInstance: new Empresa(params)]
     }
@@ -106,5 +107,16 @@ class EmpresaController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
             redirect(action: "show", id: id)
         }
+    }
+    
+    def contactos (Long id) {
+         def personaInstance = Persona.get(id)
+        if (!personaInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
+            redirect(action: "list")
+            return
+        }
+println "aqui vine"
+        [personaInstance: personaInstance]
     }
 }

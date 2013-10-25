@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import aiag.Empresa
 import grails.plugins.springsecurity.Secured
 
-@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+
 class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -12,7 +12,7 @@ class PersonaController {
     def index() {
         redirect(action: "list", params: params)
     }
-
+@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def personas_contacto(Long id){
         def empresa
         if (id!=null) {
@@ -59,6 +59,7 @@ class PersonaController {
                         email:params.email[i],telefono:params.telefono[i],empresa:empresa,cargo:cargo)
                     persona.save(flush:true)
                     redirect (controller:'Produccion',action:'elabora',id:empresa.id)
+                    return
                 }
             }   
             
@@ -69,7 +70,7 @@ class PersonaController {
         params.max = Math.min(max ?: 10, 100)
         [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
     }
-
+@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def create() {
         [personaInstance: new Persona(params)]
     }
@@ -96,6 +97,7 @@ class PersonaController {
         [personaInstance: personaInstance]
     }
 
+    @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def edit(Long id) {
         def personaInstance = Persona.get(id)
         if (!personaInstance) {
@@ -153,5 +155,16 @@ class PersonaController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "show", id: id)
         }
+    }
+    
+     def contactos (Long id) {
+         def personaInstance = Persona.get(id)
+        if (!personaInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
+            redirect(action: "list")
+            return
+        }
+println "aqui vine"
+        [personaInstance: personaInstance]
     }
 }

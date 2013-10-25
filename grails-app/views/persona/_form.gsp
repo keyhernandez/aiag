@@ -7,7 +7,7 @@
 		<g:message code="persona.telefono.label" default="Telefono" />
 		
 	</label>
-	<g:textField name="telefono" pattern="${personaInstance?.constraints.tel1.matches}" value="${personaInstance?.telefono}"/>
+	<g:textField name="telefono"  value="${personaInstance?.telefono}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'apellido', 'error')} ">
