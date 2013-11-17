@@ -5,7 +5,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'cargo.label', default: 'Cargo')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<title>Personas de Contacto</title>
 	</head>
 	<body>
 		<a href="#list-cargo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -16,7 +16,7 @@
 			</ul>
 		</div>
 		<div id="list-cargo" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1>Cargos Personas de Contacto</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

@@ -38,6 +38,7 @@ class ProduccionController {
         boolean flag = false
         def empresa = Empresa.get(id)
         if (empresa!=null){
+            if (session.i==null) session.i =0
             session.i++
             println "iiiii $session.i"
             if (nproductos!=null){

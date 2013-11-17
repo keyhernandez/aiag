@@ -12,13 +12,13 @@ class PersonaController {
     def index() {
         redirect(action: "list", params: params)
     }
-@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+    @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def personas_contacto(Long id){
         def empresa
         if (id!=null) {
             empresa = Empresa.get(id)
             
-             if (!empresa) {
+            if (!empresa) {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
                 redirect(controller:'Empresa',action: "list")
                 return
@@ -31,7 +31,7 @@ class PersonaController {
         
             if (!empresa) {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
-               // redirect(action: "list")
+                // redirect(action: "list")
                 redirect (controller:'Produccion',action:'elabora',id:empresa.id)
                 return
             }
@@ -61,26 +61,33 @@ class PersonaController {
                         email:params.email[i],telefono:params.telefono[i],empresa:empresa,cargo:cargo)
                     persona.save(flush:true)
                     vacio = false
+                    if (params.op == 'x')
                     redirect (controller:'Produccion',action:'elabora',id:empresa.id)
+                    else
+                    redirect (controller:'Empresa',action:'show',id:empresa.id)
                     return
                 }
                 else
                 vacio = true
             }   
             if (vacio == true)
+            if (params.op == 'x')
             redirect (controller:'Produccion',action:'elabora',id:empresa.id)
-                    return
+            else
+            redirect (controller:'Empresa',action:'show',id:empresa.id)
+            return
             
         }
-         [empresaInstance: empresa]
+        [empresaInstance: empresa]
     }
     
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
     }
-@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+    @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def create() {
+        
         [personaInstance: new Persona(params)]
     }
 
@@ -143,7 +150,7 @@ class PersonaController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'persona.label', default: 'Persona'), personaInstance.id])
+        flash.message = "Persona actualizada"
         redirect(action: "show", id: personaInstance.id)
     }
 
@@ -157,7 +164,7 @@ class PersonaController {
 
         try {
             personaInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'persona.label', default: 'Persona'), id])
+            flash.message = "Persona Eliminada"
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
@@ -166,14 +173,14 @@ class PersonaController {
         }
     }
     
-     def contactos (Long id) {
-         def personaInstance = Persona.get(id)
+    def contactos (Long id) {
+        def personaInstance = Persona.get(id)
         if (!personaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "list")
             return
         }
-println "aqui vine"
+        println "aqui vine"
         [personaInstance: personaInstance]
     }
 }

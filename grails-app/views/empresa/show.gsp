@@ -19,8 +19,8 @@
   <div class="nav2" role="navigation">
     <ul>
 
-      <li><g:link class="create" controller="Produccion" action="create">Productos que elabora</g:link></li>
-      <li><g:link class="create" controller="Persona" action="create">Persona de Contacto</g:link></li>
+      <li><g:link class="create" controller="Produccion" action="elabora" id="${empresaInstance?.id}">Productos que elabora</g:link></li>
+      <li><g:link class="create" controller="Persona" action="personas_contacto" id="${empresaInstance?.id}">Persona de Contacto</g:link></li>
     </ul>
   </div>
   <div id="show-empresa" class="content scaffold-show" role="main">

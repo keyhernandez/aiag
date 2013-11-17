@@ -43,7 +43,7 @@
 <div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'tel1', 'error')} ">
 	<label for="tel1">
 		<g:message code="empresa.tel1.label" default="Teléfono 1" />
-		
+		(212-XXXXXXX)
 	</label>
 	<g:textField name="tel1" pattern="${empresaInstance.constraints.tel1.matches}" value="${empresaInstance?.tel1}"/>
 </div>
@@ -51,7 +51,7 @@
 <div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'tel2', 'error')} ">
 	<label for="tel2">
 		<g:message code="empresa.tel2.label" default="Teléfono 2" />
-		
+		(212-XXXXXXX)
 	</label>
 	<g:textField name="tel2" pattern="${empresaInstance.constraints.tel2.matches}" value="${empresaInstance?.tel2}"/>
 </div>
@@ -59,7 +59,7 @@
 <div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'tel3', 'error')} ">
 	<label for="tel3">
 		<g:message code="empresa.tel3.label" default="Teléfono 3" />
-		
+		(212-XXXXXXX)
 	</label>
 	<g:textField name="tel3" pattern="${empresaInstance.constraints.tel3.matches}" value="${empresaInstance?.tel3}"/>
 </div>

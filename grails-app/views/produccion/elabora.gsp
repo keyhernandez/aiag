@@ -37,6 +37,7 @@
         <div class="fieldcontain ${hasErrors(bean: produccionInstance, field: 'producto', 'error')} required">
 
           <g:each in="${aiag.Producto.obtenerCategorias(empresaInstance?.id)}" status="i" var="categoriaInstance">
+            <br>
             <h4>${fieldValue(bean: categoriaInstance, field: "nombre")}</h4>
             <br>
             <g:each in="${aiag.Producto.productosCategorias(categoriaInstance.id)}" var="productoInstance">

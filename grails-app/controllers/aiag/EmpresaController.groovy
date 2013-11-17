@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import grails.plugins.springsecurity.Secured
 import aiag.Persona
 import aiag.PersonaController
+import aiag.Produccion
 
 class EmpresaController {
 
@@ -35,7 +36,7 @@ class EmpresaController {
         flash.message = "Empresa creada"//message(code: 'default.created.message', args: [message(code: 'empresa.label', default: 'Empresa'), empresaInstance.id])
       //  redirect(action: "show", id: empresaInstance.id)
       
-         redirect (controller:'Persona',action:'personas_contacto',id:empresaInstance.id)
+         redirect (controller:'Persona',action:'personas_contacto',params:[id:empresaInstance.id,op:'x'])
 
     }
 
@@ -99,12 +100,22 @@ class EmpresaController {
         }
 
         try {
+            
+            def produccion = Produccion.findAllByEmpresa(empresaInstance)
+            def personas = Persona.findAllByEmpresa(empresaInstance)
+            
+            produccion.each() {
+                p -> p.delete(flush: true)
+            }
+            personas.each() {
+                pe -> pe.delete(flush: true)
+            }
             empresaInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
+            flash.message = "Empresa eliminada"
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
+            flash.message = "No se puede elminar la empresa"//message(code: 'default.not.deleted.message', args: [message(code: 'empresa.label', default: 'Empresa'), nombre])
             redirect(action: "show", id: id)
         }
     }

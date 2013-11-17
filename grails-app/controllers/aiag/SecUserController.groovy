@@ -29,7 +29,7 @@ class SecUserController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'secUser.label', default: 'SecUser'), secUserInstance.id])
+        flash.message = "Usuario Creado"
         redirect(action: "show", id: secUserInstance.id)
     }
 

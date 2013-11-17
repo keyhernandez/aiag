@@ -233,7 +233,7 @@ img {
 }
 
 .nav1 a:focus, .nav1 a:hover {
-	background-color:orange; /*#999999*/;
+	background-color:#FFCC00; /* orange #999999*/;
 	color: #ffffff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
@@ -859,7 +859,7 @@ margin-left: auto;
 	color:#000000;
         }
 .CSSTableGenerator tr:last-child td{
-	border-width:0px 1px 0px 0px;
+	border-width:1px 1px 1px 1px;
 }
 /*.CSSTableGenerator tr td:last-child{
 	border-width:0px 0px 1px 0px;
@@ -874,7 +874,7 @@ margin-left: auto;
 /*	background-color:#fcf9f9;*/
 /*	border:0px solid #000000;*/
 	text-align:center;
-/*	border-width:0px 0px 1px 1px;*/
+	border-width:0px 0px 0px 1px;
 	font-size:12px;
 	font-family:Arial;
 	font-weight:bold;

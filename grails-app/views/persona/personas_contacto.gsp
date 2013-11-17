@@ -17,7 +17,10 @@
     </ul>
   </div>
   <div id="list-persona" class="content scaffold-list" role="main">
+    <br>
     <h1>Personas de Contacto</h1>
+    <h5> (*) Por cada persona, todos los campos son requeridos </h5>
+    <br>
     <g:if test="${flash.message}">
       <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -37,7 +40,7 @@
 
           <div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'nombre', 'error')} ">
             <label for="nombre">
-              <g:message code="persona.nombre.label" default="Nombre" />
+              <g:message code="persona.nombre.label" default="Nombre" /> *
 
             </label>
             <g:textField name="nombre" value="${personaInstance?.nombre}"/>
@@ -45,21 +48,21 @@
 
           <div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'apellido', 'error')} ">
             <label for="apellido">
-              <g:message code="persona.apellido.label" default="Apellido" />
+              <g:message code="persona.apellido.label" default="Apellido" /> *
 
             </label>
             <g:textField name="apellido" value="${personaInstance?.apellido}"/>
           </div>
           <div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'telefono', 'error')} ">
             <label for="telefono">
-              <g:message code="persona.telefono.label" default="Telefono" />
-
+              <g:message code="persona.telefono.label" default="Teléfono" /> 
+(212-XXXXXXX) *
             </label>
             <g:textField name="telefono" pattern="${aiag.Persona.constraints.telefono.matches}" value="${personaInstance?.telefono}"/>
           </div>
           <div class="fieldcontain ${hasErrors(bean: personaInstance, field: 'email', 'error')} ">
             <label for="email">
-              <g:message code="persona.email.label" default="Email" />
+              <g:message code="persona.email.label" default="Email" /> *
 
             </label>
             <g:textField name="email" value="${personaInstance?.email}"/>

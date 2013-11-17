@@ -11,6 +11,11 @@ class SecUser {
 	boolean accountLocked
 	boolean passwordExpired
 
+    
+     String toString(){
+        return "${username}"
+    }
+    
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
