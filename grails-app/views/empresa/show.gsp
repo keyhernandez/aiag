@@ -16,6 +16,13 @@
       <li><g:link class="create" action="create">Crear Nueva Empresa</g:link></li>
     </ul>
   </div>
+  <div class="nav2" role="navigation">
+    <ul>
+
+      <li><g:link class="create" controller="Produccion" action="create">Productos que elabora</g:link></li>
+      <li><g:link class="create" controller="Persona" action="create">Persona de Contacto</g:link></li>
+    </ul>
+  </div>
   <div id="show-empresa" class="content scaffold-show" role="main">
     <h1>${empresaInstance?.nombre}</h1>
     <g:if test="${flash.message}">
@@ -194,42 +201,81 @@
       </g:if>
 
       <br>
-      <li class="fieldcontain">
-        <h4> <span id="contrato_propio-label" class="property-label"> Personas de Contacto</span></h4>
-        <span class="property-value" aria-labelledby="contrato_propio-label"></span>
-
-      </li>
-
-
-      <g:each in="${aiag.Persona.findAllByEmpresa(empresaInstance)}" status="i" var="personaInstance" >
-
+      <g:if test="${aiag.Persona.findAllByEmpresa(empresaInstance)}">
         <li class="fieldcontain">
-          <span id="contrato_propio-label" class="property-label">${personaInstance.cargo} </span> 
-          <span class="property-value" aria-labelledby="cargo-label"><g:link controller="persona" action="show" id="${personaInstance.id}">${personaInstance.nombre.encodeAsHTML()} ${personaInstance.apellido}</g:link> </span>
+          <h4> <span id="contrato_propio-label" class="property-label"> Personas de Contacto</span></h4>
+          <span class="property-value" aria-labelledby="contrato_propio-label"></span>
+
         </li>
 
-      </g:each>
 
-      <li class="fieldcontain">
-        <h4> <span id="contrato_propio-label" class="property-label"> DATOS CLASIFICATORIOS </span></h4>
-        <span class="property-value" aria-labelledby="contrato_propio-label"></span>
-
-      </li>
-      <g:each in="${aiag.Producto.executeQuery("select distinct(pp.categoria) from Producto pp,Produccion p,Categoria c where  pp.id =p.producto and c.id=pp.categoria and p.empresa="
-+empresaInstance.id)}" status="i" var="categoriaInstance" >
-        <li class="fieldcontain">
-          <span id="contrato_propio-label" class="property-label">${categoriaInstance.nombre}</span>
-   <g:each in="${aiag.Producto.executeQuery("select p.producto from Produccion p where p.empresa ="+empresaInstance.id+" and p.producto.categoria="+categoriaInstance.id)}" status="j" var="productoInstance" >
+        <g:each in="${aiag.Persona.findAllByEmpresa(empresaInstance)}" status="i" var="personaInstance" >
 
           <li class="fieldcontain">
-
-            <span class="property-value" aria-labelledby="cargo-label"><g:link controller="producto" action="show" id="${productoInstance.id}">${productoInstance.nombre} </g:link> </span>
+            <span id="contrato_propio-label" class="property-label">${personaInstance.cargo} </span> 
+            <span class="property-value" aria-labelledby="cargo-label"><g:link controller="persona" action="show" id="${personaInstance.id}">${personaInstance.nombre.encodeAsHTML()} ${personaInstance.apellido}</g:link> </span>
           </li>
 
         </g:each>
+
+      </g:if>
+      <br>
+
+
+      <g:if test="${aiag.Producto.executeQuery("select distinct(pp.categoria) from Producto pp,Produccion p,Categoria c where  pp.id =p.producto and c.id=pp.categoria and p.empresa="
++empresaInstance.id)}">
+
+
+        <li class="fieldcontain">
+          <h4> <span id="contrato_propio-label" class="property-label"> DATOS CLASIFICATORIOS </span></h4>
+          <span class="property-value" aria-labelledby="contrato_propio-label"></span>
+
         </li>
-     
-      </g:each>
+
+
+        <g:each in="${aiag.Producto.executeQuery("select distinct(pp.categoria) from Producto pp,Produccion p,Categoria c where  pp.id =p.producto and c.id=pp.categoria and p.empresa="
++empresaInstance.id)}" status="i" var="categoriaInstance" >
+
+ <!--<g:each in="${aiag.Producto.executeQuery("select p.producto from Produccion p where p.empresa ="+empresaInstance.id+" and p.producto.categoria="+categoriaInstance.id)}" status="j" var="productoInstance" >
+      </g:each>    -->     
+
+  <br>
+          <div class="CSSTableGenerator" >
+            <table >
+              <tr>
+                <td colspan="3">
+${categoriaInstance.nombre}
+                </td>
+             <!--   <td >
+                  Title 2
+                </td>
+                <td>
+                  Title 3
+                </td> -->
+              </tr>
+              <tr> <g:each in="${aiag.Producto.executeQuery("select p.producto from Produccion p where p.empresa ="+empresaInstance.id+" and p.producto.categoria="+categoriaInstance.id)}" status="j" var="productoInstance" >
+      <g:if test="${(j %3) !=0}">
+                <td >
+                  ${productoInstance.nombre}
+                </td>
+      </g:if>    
+                <g:else>
+                  </tr>
+                  <tr>
+                     <td >
+                  ${productoInstance.nombre}
+                </td> </g:else>
+                </g:each>
+              </tr>
+            
+           
+           
+            </table>
+          </div>
+
+        </g:each>
+        <br>
+      </g:if>
     </ol>
     <g:form>
       <fieldset class="buttons">

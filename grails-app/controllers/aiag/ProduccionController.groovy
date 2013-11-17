@@ -19,10 +19,10 @@ class ProduccionController {
         [produccionInstanceList: Produccion.list(params), produccionInstanceTotal: Produccion.count()]
     }
 
-     def listCategoria ()
+    def listCategoria ()
     {
         println "entro"
-       // def empresa = Empresa.get(id)
+        // def empresa = Empresa.get(id)
         [productoInstanceListC: Producto.findByCategoria(empresa.categoria), productoInstanceTotalC: productoInstanceList.count()]
     }
     def create() {
@@ -31,33 +31,52 @@ class ProduccionController {
 
    
     def elabora (Long id) {
+        
         def nproductos=params.check
-       println nproductos
+        println nproductos
         def producto
+        boolean flag = false
         def empresa = Empresa.get(id)
         if (empresa!=null){
-        if (nproductos!=null){
-           nproductos = params.list("check")
-            println nproductos
-            nproductos.each() 
-            { i->
-            println i
-            producto= Producto.get(i) 
-            println producto
-            def produccion = new Produccion(empresa:empresa,producto:producto)
-            produccion.save(flush:true)
-            println produccion
+            session.i++
+            println "iiiii $session.i"
+            if (nproductos!=null){
+                nproductos = params.list("check")
+                println nproductos
+                if (nproductos!=null){
+                    nproductos.each() 
+                    { i->
+                        println "i"
+                        producto= Producto.get(i) 
+                        println producto
+                        if (producto!=null) {
+                            def produccion = new Produccion(empresa:empresa,producto:producto)
+                            (produccion.save(flush:true))
+           
+                            println "produccion"
+                            flag = false
+            
+                        }
+                    }
+                }
+                redirect(controller:'Empresa',action: "show", id: empresa.id)
+                println params 
+            } else 
+            {
+                if (session.i >=2) 
+                { 
+                    session.i = 0
+                    redirect(controller:'Empresa',action: "show", id: empresa.id) 
+                }
             }
-  redirect(controller:'Empresa',action: "show", id: empresa.id)
-            println params }
         }
-         else  {
+        else  {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
-           // redirect(action: "list")
+            // redirect(action: "list")
             return
         }
         [empresaInstance: empresa]
-      // redirect(controller:'Empresa',action: "show", id: empresa.id)
+        // redirect(controller:'Empresa',action: "show", id: empresa.id)
        
     }
     def save() {

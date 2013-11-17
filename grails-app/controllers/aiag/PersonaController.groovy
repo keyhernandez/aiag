@@ -31,7 +31,8 @@ class PersonaController {
         
             if (!empresa) {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
-                redirect(action: "list")
+               // redirect(action: "list")
+                redirect (controller:'Produccion',action:'elabora',id:empresa.id)
                 return
             }
             else 
@@ -44,6 +45,7 @@ class PersonaController {
         println empresa
         println params
         def persona
+        boolean vacio = true
         if (params.cargo!=null){
             
           
@@ -58,12 +60,19 @@ class PersonaController {
                     persona = new Persona(nombre:params.nombre[i],apellido:params.apellido[i],
                         email:params.email[i],telefono:params.telefono[i],empresa:empresa,cargo:cargo)
                     persona.save(flush:true)
+                    vacio = false
                     redirect (controller:'Produccion',action:'elabora',id:empresa.id)
                     return
                 }
+                else
+                vacio = true
             }   
+            if (vacio == true)
+            redirect (controller:'Produccion',action:'elabora',id:empresa.id)
+                    return
             
         }
+         [empresaInstance: empresa]
     }
     
     def list(Integer max) {

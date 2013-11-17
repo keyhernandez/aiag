@@ -123,9 +123,16 @@ display: none;
           </g:each>
 -->
     <br>
+     <sec:ifNotLoggedIn>
           <a style="color: black; display:block; padding-bottom:1em;" class="boton" title="" href="${createLink(controller:'Login',action:'index')}">
             Ingresar Datos de Empresa
           </a> <br>
+            </sec:ifNotLoggedIn>
+    <sec:ifLoggedIn>
+      <a style="color: black; display:block; padding-bottom:1em;" class="boton" title="" href="${createLink(controller:'Empresa',action:'create')}">
+            Ingresar Datos de Empresa
+          </a> <br>
+    </sec:ifLoggedIn>
           <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Empresa',action:'index')}">
             Consultar Datos de Empresas
           </a>

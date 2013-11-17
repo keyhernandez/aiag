@@ -21,8 +21,9 @@
     <g:if test="${flash.message}">
       <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <g:hiddenField name="id" value="${empresaInstance?.id}" />
+   
     <g:form >
+       <g:hiddenField name="id" value="${empresaInstance?.id}" />
       <fieldset class="form">
 
         <g:each in="${aiag.Cargo.list()}" status="i" var="cargoInstance">

@@ -32,7 +32,7 @@ class EmpresaController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'empresa.label', default: 'Empresa'), empresaInstance.id])
+        flash.message = "Empresa creada"//message(code: 'default.created.message', args: [message(code: 'empresa.label', default: 'Empresa'), empresaInstance.id])
       //  redirect(action: "show", id: empresaInstance.id)
       
          redirect (controller:'Persona',action:'personas_contacto',id:empresaInstance.id)

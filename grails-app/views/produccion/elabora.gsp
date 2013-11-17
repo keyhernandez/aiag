@@ -4,7 +4,7 @@
   <head>
     <meta name="layout" content="main">
   <g:set var="entityName" value="${message(code: 'produccion.label', default: 'Produccion')}" />
-  <title><g:message code="default.create.label" args="[entityName]" /></title>
+  <title>Datos Clasificatorios</title>
 </head>
 <body>
   <a href="#create-produccion" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -15,7 +15,8 @@
     </ul>
   </div>
   <div id="create-produccion" class="content scaffold-create" role="main">
-    <h1>${empresa?.id}</h1>
+    <h1>Datos Clasificatorios - ${empresaInstance?.nombre}</h1>
+  
     <g:if test="${flash.message}">
       <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -30,14 +31,14 @@
 
     <g:form >
       <fieldset class="form">
- 
+
         <g:hiddenField  name="empresa.id" value="${produccionInstance?.empresa?.id}" />
         <g:hiddenField name="id" value="${empresaInstance?.id}" />
         <div class="fieldcontain ${hasErrors(bean: produccionInstance, field: 'producto', 'error')} required">
 
           <g:each in="${aiag.Producto.obtenerCategorias(empresaInstance?.id)}" status="i" var="categoriaInstance">
             <h4>${fieldValue(bean: categoriaInstance, field: "nombre")}</h4>
-            
+            <br>
             <g:each in="${aiag.Producto.productosCategorias(categoriaInstance.id)}" var="productoInstance">
 
               <label for="nombre">
