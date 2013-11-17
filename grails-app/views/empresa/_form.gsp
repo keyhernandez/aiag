@@ -1,5 +1,6 @@
 <%@ page import="aiag.Empresa" %>
-
+<br>
+<h4>Datos de la Empresa</h4>
 <div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'tipo', 'error')} required">
 	<label for="tipo">
 		<g:message code="empresa.tipo.label" default="Tipo de Empresa" />
@@ -104,7 +105,7 @@
 	<g:textField name="twitter" value="${empresaInstance?.twitter}"/>
 </div>
 <br>
-<h4>Información de Empleados</h4>
+<h4>Datos Laborales</h4>
 
 <div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'obreros', 'error')} ">
 	<label for="obreros">
@@ -124,8 +125,8 @@
 
 <div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'contrato_colectivo', 'error')} ">
 	<label for="contrato_colectivo">
-		<g:message code="empresa.contrato_colectivo.label" default="Contrato Colectivo" />
-		
+      ¿Están los trabajadores amparados por <g:message code="empresa.contrato_colectivo.label" default="Contrato Colectivo" />?
+	
 	</label>
 	<g:checkBox name="contrato_colectivo" value="${empresaInstance?.contrato_colectivo}" />
 </div>

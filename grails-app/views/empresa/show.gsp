@@ -148,7 +148,7 @@
       <br>
       <!-- personas contacto  -->
       <li class="fieldcontain">
-        <h4> <span id="obreros-label" class="property-label" align='center'>Información de Empleados</span> </h4>
+        <h4> <span id="obreros-label" class="property-label" align='center'>Datos Laborales</span> </h4>
       </li>
 
       <g:if test="${empresaInstance?.obreros}">
@@ -237,39 +237,39 @@
 +empresaInstance.id)}" status="i" var="categoriaInstance" >
 
  <!--<g:each in="${aiag.Producto.executeQuery("select p.producto from Produccion p where p.empresa ="+empresaInstance.id+" and p.producto.categoria="+categoriaInstance.id)}" status="j" var="productoInstance" >
-      </g:each>    -->     
+</g:each>    -->     
 
-  <br>
+          <br>
           <div class="CSSTableGenerator" >
             <table >
               <tr>
                 <td colspan="3">
 ${categoriaInstance.nombre}
                 </td>
-             <!--   <td >
-                  Title 2
-                </td>
-                <td>
-                  Title 3
-                </td> -->
+                <!--   <td >
+                     Title 2
+                   </td>
+                   <td>
+                     Title 3
+                   </td> -->
               </tr>
               <tr> <g:each in="${aiag.Producto.executeQuery("select p.producto from Produccion p where p.empresa ="+empresaInstance.id+" and p.producto.categoria="+categoriaInstance.id)}" status="j" var="productoInstance" >
-      <g:if test="${(j %3) !=0}">
-                <td >
-                  ${productoInstance.nombre}
-                </td>
-      </g:if>    
+                <g:if test="${(j %3) !=0}">
+                  <td > ${productoInstance.nombre} ${productoInstance.marca}
+                 <!-- <g:link controller="produccion" action="show" id="${productoInstance.id}"></g:link>-->
+                  </td>
+                </g:if>    
                 <g:else>
                   </tr>
                   <tr>
-                     <td >
-                  ${productoInstance.nombre}
-                </td> </g:else>
-                </g:each>
+                    <td >
+${productoInstance.nombre}
+                    </td> </g:else>
+              </g:each>
               </tr>
-            
-           
-           
+
+
+
             </table>
           </div>
 

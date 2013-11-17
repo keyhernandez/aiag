@@ -351,16 +351,17 @@ fieldset,
 .fieldcontain .property-label {
 	color: #666666;
 	text-align: right;
-	width: 25%;
+	width: 35%;
 }
 
 .fieldcontain .property-label {
 	float: left;
+       
 }
 
 .fieldcontain .property-value {
 	display: block;
-	margin-left: 27%;
+	margin-left: 37%;
         
 }
 

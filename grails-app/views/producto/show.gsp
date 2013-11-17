@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list producto">
 			
+                          <g:if test="${productoInstance?.nombre}">
+				<li class="fieldcontain">
+					<span id="nombre-label" class="property-label"><g:message code="producto.nombre.label" default="Nombre" /></span>
+					
+						<span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${productoInstance}" field="nombre"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${productoInstance?.marca}">
 				<li class="fieldcontain">
 					<span id="marca-label" class="property-label"><g:message code="producto.marca.label" default="Marca" /></span>
@@ -41,15 +50,7 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${productoInstance?.nombre}">
-				<li class="fieldcontain">
-					<span id="nombre-label" class="property-label"><g:message code="producto.nombre.label" default="Nombre" /></span>
-					
-						<span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${productoInstance}" field="nombre"/></span>
-					
-				</li>
-				</g:if>
-			
+				
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
