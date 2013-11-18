@@ -27,6 +27,7 @@
    
     <g:form >
        <g:hiddenField name="id" value="${empresaInstance?.id}" />
+        <g:hiddenField name="op" value="${op}" />
       <fieldset class="form">
 
         <g:each in="${aiag.Cargo.list()}" status="i" var="cargoInstance">
