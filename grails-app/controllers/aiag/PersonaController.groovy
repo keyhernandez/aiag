@@ -15,6 +15,8 @@ class PersonaController {
     @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def personas_contacto(Long id){
         def empresa
+        println params
+       
         if (id!=null) {
             empresa = Empresa.get(id)
             
@@ -26,13 +28,18 @@ class PersonaController {
             else
             session.empresa = empresa
         }
-        else {
-            empresa = Empresa.get(session.empresa.id)
-        
+        else 
+        {
+          //  if (session.empresa!=null)
+          //  empresa = Empresa.get(session.empresa.id)
+            
+             if (params.id!=null)
+        empresa = Empresa.get(params.id[0])
+       // empresa = Empresa.get(id)
             if (!empresa) {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
                 // redirect(action: "list")
-                redirect (controller:'Produccion',action:'elabora',id:empresa.id)
+               // redirect (controller:'Produccion',action:'elabora',id:empresa.id)
                 return
             }
             else 
@@ -42,6 +49,7 @@ class PersonaController {
             // else 
             // return
         }
+        
         println empresa
         println params
         def persona
