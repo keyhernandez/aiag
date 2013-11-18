@@ -43,9 +43,9 @@
             <g:each in="${aiag.Producto.productosCategorias(categoriaInstance.id)}" var="productoInstance">
 
               <label for="nombre">
-${fieldValue(bean: productoInstance, field: "nombre")}
+${fieldValue(bean: productoInstance, field: "nombre")} ${productoInstance.marca?.nombre}
 
-              </label>
+              </label> 
               <g:checkBox name="check" value="${productoInstance.id}" checked="${false}" />
             </g:each>
           </g:each>

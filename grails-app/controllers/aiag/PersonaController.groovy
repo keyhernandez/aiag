@@ -86,7 +86,7 @@ class PersonaController {
             return
             
         }
-        [empresaInstance: empresa]
+        [empresaInstance: empresa,op:params.op]
     }
     
     def list(Integer max) {
