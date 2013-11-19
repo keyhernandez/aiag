@@ -69,21 +69,23 @@ class PersonaController {
                         email:params.email[i],telefono:params.telefono[i],empresa:empresa,cargo:cargo)
                     persona.save(flush:true)
                     vacio = false
-                    if (params.op == 'x')
-                    redirect (controller:'Produccion',action:'elabora',id:empresa.id)
-                    else
-                    redirect (controller:'Empresa',action:'show',id:empresa.id)
-                    return
+//                    if (params.op == 'x')
+//                    redirect (controller:'Produccion',action:'elabora',id:empresa.id)
+//                    else
+//                    redirect (controller:'Empresa',action:'show',id:empresa.id)
+//                    return
                 }
                 else
                 vacio = true
             }   
-            if (vacio == true)
+       //     if (vacio == true) {
+       println params.op + " OPCION "
             if (params.op == 'x')
             redirect (controller:'Produccion',action:'elabora',id:empresa.id)
             else
             redirect (controller:'Empresa',action:'show',id:empresa.id)
             return
+         //   }
             
         }
         [empresaInstance: empresa,op:params.op]

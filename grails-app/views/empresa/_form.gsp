@@ -1,12 +1,14 @@
 <%@ page import="aiag.Empresa" %>
 <br>
 <h4>Datos de la Empresa</h4>
-<div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'tipo', 'error')} required">
-	<label for="tipo">
-		<g:message code="empresa.tipo.label" default="Tipo de Empresa" />
+
+
+<div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'nombre', 'error')} required">
+	<label for="nombre">
+		<g:message code="empresa.nombre.label" default="Nombre" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="tipo" name="tipo.id" from="${aiag.TipoEmpresa.list()}" optionKey="id" required="" value="${empresaInstance?.tipo?.id}" class="many-to-one"/>
+	<g:textField name="nombre" required="" value="${empresaInstance?.nombre}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'afiliado', 'error')} ">
@@ -17,12 +19,13 @@
 	<g:checkBox name="afiliado" value="${empresaInstance?.afiliado}" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'nombre', 'error')} required">
-	<label for="nombre">
-		<g:message code="empresa.nombre.label" default="Nombre" />
+
+<div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'tipo', 'error')} required">
+	<label for="tipo">
+		<g:message code="empresa.tipo.label" default="Tipo de Empresa" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="nombre" required="" value="${empresaInstance?.nombre}"/>
+	<g:select id="tipo" name="tipo.id" from="${aiag.TipoEmpresa.list()}" optionKey="id" required="" value="${empresaInstance?.tipo?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: empresaInstance, field: 'domicilio', 'error')} required">
