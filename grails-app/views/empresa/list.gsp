@@ -28,7 +28,7 @@
 					
 						<g:sortableColumn property="tipo" title="${message(code: 'empresa.tipo.label', default: 'Tipo')}" />
                                                 
-                                                <g:sortableColumn property="domicilio" title="${message(code: 'empresa.domicilio.label', default: 'Domicilio')}" />
+                                                <g:sortableColumn property="domicilio" title="${message(code: 'empresa.domicilio.label', default: 'Domicilio')}"  style="width: 200px"/>
 					
 						<g:sortableColumn property="rif" title="${message(code: 'empresa.rif.label', default: 'Rif')}" />
 					
