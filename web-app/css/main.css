@@ -107,7 +107,9 @@ img {
 .scaffold-list h1 {
 	border: none;
 }
-
+.scaffold-list {
+	font-size: 0.9em;
+}
 .footer {
 /*	background: #abbf78;*/
 	color: #000;

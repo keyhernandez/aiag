@@ -15,6 +15,9 @@ class EmpresaController {
     }
 
     def list(Integer max) {
+        println params
+        params.sort = "nombre"
+        params.order = "asc"
         params.max = Math.min(max ?: 10, 100)
         [empresaInstanceList: Empresa.list(params), empresaInstanceTotal: Empresa.count()]
     }
