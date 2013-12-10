@@ -4,6 +4,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
+                <r:require module="export"/>
 		<g:set var="entityName" value="${message(code: 'empresa.label', default: 'Empresa')}" />
 		<title>Empresas</title>
 	</head>
@@ -65,6 +66,7 @@
 			<div class="pagination">
 				<g:paginate total="${empresaInstanceTotal}" />
 			</div>
+                        <export:formats formats="['excel','pdf']" />
 		</div>
 	</body>
 </html>

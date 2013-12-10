@@ -9,7 +9,8 @@ import aiag.Produccion
 class EmpresaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+def exportService
+    def grailsApplication  //inject GrailsApplication
     def index() {
         redirect(action: "list", params: params)
     }
@@ -19,11 +20,19 @@ class EmpresaController {
         params.sort = "nombre"
         params.order = "asc"
         params.max = Math.min(max ?: 10, 100)
+         if(!params.max) params.max = 10
+        if(params?.format && params.format != "html"){
+			response.contentType = grailsApplication.config.grails.mime.types[params.format]
+			response.setHeader("Content-disposition", "attachment; filename=empresas.${params.extension}")
+
+exportService.export(params.format, response.outputStream,Empresa.list(params), [:], [:])
+		}
+        
         [empresaInstanceList: Empresa.list(params), empresaInstanceTotal: Empresa.count()]
     }
 
     
-
+  
     @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
     def create() {
         [empresaInstance: new Empresa(params)]

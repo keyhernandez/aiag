@@ -19,11 +19,13 @@ grails.mime.types = [
     atom:          'application/atom+xml',
     css:           'text/css',
     csv:           'text/csv',
+    excel: 'application/vnd.ms-excel',
     form:          'application/x-www-form-urlencoded',
     html:          ['text/html','application/xhtml+xml'],
     js:            'text/javascript',
     json:          ['application/json', 'text/json'],
     multipartForm: 'multipart/form-data',
+    pdf: 'application/pdf',
     rss:           'application/rss+xml',
     text:          'text/plain',
     xml:           ['text/xml', 'application/xml']
