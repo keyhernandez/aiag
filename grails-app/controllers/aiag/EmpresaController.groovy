@@ -44,7 +44,7 @@ class EmpresaController {
             Map parameters = [title: "AIAG. Listado de Empresas", "column.widths": [0.4, 0.2, 0.3,0.3,0.7,0.3,0.3]]
                         
             
-            exportService.export(params.format, response.outputStream, Empresa.list(params), fields, labels, formatters, parameters)
+            exportService.export(params.format, response.outputStream, Empresa.list(sort:'nombre',order:'asc'), fields, labels, formatters, parameters)
         }
         
         [empresaInstanceList: Empresa.list(params), empresaInstanceTotal: Empresa.count()]

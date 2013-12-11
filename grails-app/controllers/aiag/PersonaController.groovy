@@ -118,7 +118,7 @@ class PersonaController {
             Map parameters = [title: "AIAG. Personas de Contacto", "column.widths": [0.2, 0.1, 0.1,0.2,0.2]]
                         
             
-            exportService.export(params.format, response.outputStream, Persona.list(params), fields, labels, formatters, parameters)
+            exportService.export(params.format, response.outputStream, Persona.list(sort:"empresa.nombre",order:"asc"), fields, labels, formatters, parameters)
         }
         
         
