@@ -8,7 +8,9 @@ import grails.plugins.springsecurity.Secured
 class PersonaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+ def exportService
+    def grailsApplication  //inject GrailsApplication
+    
     def index() {
         redirect(action: "list", params: params)
     }
@@ -92,7 +94,34 @@ class PersonaController {
     }
     
     def list(Integer max) {
+        params.sort = "empresa.nombre"
+        params.order = "asc"
         params.max = Math.min(max ?: 10, 100)
+        
+        if(!params.max) params.max = 10
+        if(params?.format && params.format != "html"){
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=PersonasContacto.${params.extension}")
+
+            
+            List fields = ["empresa","nombre","apellido","email","cargo"]
+            Map labels = ["empresa":"Empresa","nombre":"Nombre","apellido":"Apellido","email":"Correo","cargo":"Cargo"]
+
+
+
+            // Formatter closure
+            def upperCase = { domain, value ->
+                return value.toUpperCase()
+            }
+
+            Map formatters = [nombre: upperCase]		
+            Map parameters = [title: "AIAG. Personas de Contacto", "column.widths": [0.2, 0.1, 0.1,0.2,0.2]]
+                        
+            
+            exportService.export(params.format, response.outputStream, Persona.list(params), fields, labels, formatters, parameters)
+        }
+        
+        
         [personaInstanceList: Persona.list(params), personaInstanceTotal: Persona.count()]
     }
     @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])

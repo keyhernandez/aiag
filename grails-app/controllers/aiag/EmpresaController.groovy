@@ -9,7 +9,7 @@ import aiag.Produccion
 class EmpresaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-def exportService
+    def exportService
     def grailsApplication  //inject GrailsApplication
     def index() {
         redirect(action: "list", params: params)
@@ -20,13 +20,32 @@ def exportService
         params.sort = "nombre"
         params.order = "asc"
         params.max = Math.min(max ?: 10, 100)
-         if(!params.max) params.max = 10
+        if(!params.max) params.max = 10
         if(params?.format && params.format != "html"){
-			response.contentType = grailsApplication.config.grails.mime.types[params.format]
-			response.setHeader("Content-disposition", "attachment; filename=empresas.${params.extension}")
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=empresas.${params.extension}")
 
-exportService.export(params.format, response.outputStream,Empresa.list(params), [:], [:])
-		}
+            List fields = ["nombre", "tipo","email","rif","domicilio","tel1","tel2"]
+            Map labels = ["nombre":"Nombre", "tipo":"Tipo de Empresa","email":"Correo","rif":"Rif","domicilio":"Direccion","tel1":"Tlf. 1","tel2":"Telf. 2"]
+
+
+            /* Formatter closure in previous releases
+            def upperCase = { value ->
+            return value.toUpperCase()
+            }
+             */
+
+            // Formatter closure
+            def upperCase = { domain, value ->
+                return value.toUpperCase()
+            }
+
+            Map formatters = [nombre: upperCase]		
+            Map parameters = [title: "AIAG. Listado de Empresas", "column.widths": [0.4, 0.2, 0.3,0.3,0.7,0.3,0.3]]
+                        
+            
+            exportService.export(params.format, response.outputStream, Empresa.list(params), fields, labels, formatters, parameters)
+        }
         
         [empresaInstanceList: Empresa.list(params), empresaInstanceTotal: Empresa.count()]
     }
@@ -46,9 +65,9 @@ exportService.export(params.format, response.outputStream,Empresa.list(params), 
         }
 
         flash.message = "Empresa creada"//message(code: 'default.created.message', args: [message(code: 'empresa.label', default: 'Empresa'), empresaInstance.id])
-      //  redirect(action: "show", id: empresaInstance.id)
+        //  redirect(action: "show", id: empresaInstance.id)
       
-         redirect (controller:'Persona',action:'personas_contacto',params:[id:empresaInstance.id,op:'x'])
+        redirect (controller:'Persona',action:'personas_contacto',params:[id:empresaInstance.id,op:'x'])
 
     }
 
@@ -85,7 +104,7 @@ exportService.export(params.format, response.outputStream,Empresa.list(params), 
         if (version != null) {
             if (empresaInstance.version > version) {
                 empresaInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'empresa.label', default: 'Empresa')] as Object[],
+                    [message(code: 'empresa.label', default: 'Empresa')] as Object[],
                           "Another user has updated this Empresa while you were editing")
                 render(view: "edit", model: [empresaInstance: empresaInstance])
                 return
@@ -133,13 +152,13 @@ exportService.export(params.format, response.outputStream,Empresa.list(params), 
     }
     
     def contactos (Long id) {
-         def personaInstance = Persona.get(id)
+        def personaInstance = Persona.get(id)
         if (!personaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'persona.label', default: 'Persona'), id])
             redirect(action: "list")
             return
         }
-println "aqui vine"
+        println "aqui vine"
         [personaInstance: personaInstance]
     }
 }

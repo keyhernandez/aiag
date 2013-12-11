@@ -33,7 +33,7 @@
       <sec:ifAnyGranted roles="ROLE_SUPERUSER"><li><a class="list" href="${createLink(controller:'SecUser',action:'index')}">Usuarios</a></li></sec:ifAnyGranted>
       <sec:ifAnyGranted roles="ROLE_SUPERUSER"><li><a class="list" href="${createLink(controller:'SecRole',action:'index')}">Roles</a></li></sec:ifAnyGranted>  
       <sec:ifAnyGranted roles="ROLE_SUPERUSER"><li><a class="list" href="${createLink(controller:'TipoEmpresa',action:'index')}">Tipo de Empresa</a></li></sec:ifAnyGranted>
-      <sec:ifAnyGranted roles="ROLE_SUPERUSER"><li><a class="list" href="${createLink(controller:'Cargo',action:'index')}">Personas Contacto</a></li></sec:ifAnyGranted>
+      <sec:ifAnyGranted roles="ROLE_SUPERUSER"><li><a class="list" href="${createLink(controller:'Persona',action:'index')}">Personas Contacto</a></li></sec:ifAnyGranted>
       <sec:ifAnyGranted roles="ROLE_SUPERUSER"><li><a class="list" href="${createLink(controller:'Categoria',action:'index')}">Categoría Productos</a></li></sec:ifAnyGranted>
       <sec:ifAnyGranted roles="ROLE_SUPERUSER"><li><a class="list" href="${createLink(controller:'Marca',action:'index')}">Marcas</a></li></sec:ifAnyGranted>
       <sec:ifAnyGranted roles="ROLE_SUPERUSER"><li><a class="list" href="${createLink(controller:'Producto',action:'index')}">Productos</a></li></sec:ifAnyGranted>
