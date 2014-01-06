@@ -28,7 +28,7 @@ static searchable = true
 
     static constraints = {
         nombre(blank:false, nullable:false)
-        domicilio(blank:false, nullable:false,size:10..100)
+        domicilio(blank:false, nullable:false,size:10..1000)
         rif(blank:false, nullable:false, unique:true)
         email (blank:false, nullable:false, unique:true, email:true)
         sitioweb (nullable:true,unique:true, url:true)
