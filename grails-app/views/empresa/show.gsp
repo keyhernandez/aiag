@@ -15,6 +15,11 @@
       <li><g:link class="list" action="list">Listar Empresas</g:link></li>
       <li><g:link class="create" action="create">Crear Nueva Empresa</g:link></li>
     </ul>
+     <ul>
+      <g:form controller="empresa" action="search" class="navbar-search pull-right">
+  <g:textField name="q" value="" class="search-query" placeholder="Buscar Empresa"/>
+</g:form>
+    </ul>
   </div>
   <div class="nav2" role="navigation">
     <ul>

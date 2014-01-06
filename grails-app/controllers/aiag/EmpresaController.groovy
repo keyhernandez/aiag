@@ -5,12 +5,16 @@ import grails.plugins.springsecurity.Secured
 import aiag.Persona
 import aiag.PersonaController
 import aiag.Produccion
+import org.compass.core.engine.SearchEngineQueryParseException
 
 class EmpresaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     def exportService
     def grailsApplication  //inject GrailsApplication
+    def searchableService
+    static String WILDCARD = "*"
+     
     def index() {
         redirect(action: "list", params: params)
     }
@@ -72,6 +76,7 @@ class EmpresaController {
     }
 
     def show(Long id) {
+        println "show $params.lista"
         def empresaInstance = Empresa.get(id)
         if (!empresaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
@@ -81,7 +86,6 @@ class EmpresaController {
 
         [empresaInstance: empresaInstance]
     }
-
     def edit(Long id) {
         def empresaInstance = Empresa.get(id)
         if (!empresaInstance) {
@@ -160,5 +164,27 @@ class EmpresaController {
         }
         println "aqui vine"
         [personaInstance: personaInstance]
+    }
+    
+    
+   
+
+    def search = {
+        if (!params.q?.trim()) {
+            return [:]
+        }
+        try {
+            String searchTerm = WILDCARD+ params.q + WILDCARD
+            //   println (Producto.search("*Apple*"))
+            return [searchResult: searchableService.search(searchTerm, params)] //searchTerm, params
+        } catch (SearchEngineQueryParseException ex) {
+            return [parseException: true]
+        }
+    }
+    def indexAll = {
+        Thread.start {
+            searchableService.index()
+        }
+        render("bulk index started in a background thread")
     }
 }

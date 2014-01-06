@@ -1,7 +1,7 @@
 package aiag
 
 class Empresa {
-
+static searchable = true   
     String nombre
     String domicilio
     String rif
