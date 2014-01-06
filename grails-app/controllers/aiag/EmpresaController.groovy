@@ -76,7 +76,7 @@ class EmpresaController {
     }
 
     def show(Long id) {
-        println "show $params.lista"
+       
         def empresaInstance = Empresa.get(id)
         if (!empresaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'empresa.label', default: 'Empresa'), id])
