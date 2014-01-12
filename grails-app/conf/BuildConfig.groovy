@@ -46,7 +46,8 @@ runtime 'postgresql:postgresql:8.4-702.jdbc3'
     }
 
     plugins {
-        runtime ":hibernate:$grailsVersion"
+       runtime ":hibernate:$grailsVersion"
+    //     runtime ":hibernate:3.6.10.1"
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
 
@@ -56,7 +57,7 @@ runtime 'postgresql:postgresql:8.4-702.jdbc3'
         //runtime ":yui-minify-resources:0.1.5"
 
         build ":tomcat:$grailsVersion"
-
+// build ":tomcat:7.0.42"
         runtime ":database-migration:1.3.2"
 
         compile ':cache:1.0.1'

@@ -35,7 +35,7 @@
 
     <g:sortableColumn property="tipo" title="${message(code: 'empresa.tipo.label', default: 'Tipo')}" />
 
-    <g:sortableColumn property="domicilio" title="${message(code: 'empresa.domicilio.label', default: 'Domicilio')}"  style="width: 200px"/>
+    <g:sortableColumn property="domicilio" title="${message(code: 'empresa.domicilio.label', default: 'Domicilio')}"  style="width: 100px"/>
 
     <g:sortableColumn property="rif" title="${message(code: 'empresa.rif.label', default: 'Rif')}" />
 
@@ -55,7 +55,7 @@
 
       <td>${fieldValue(bean: empresaInstance, field: "tipo")}</td>
 
-      <td>${fieldValue(bean: empresaInstance, field: "domicilio")}</td>
+      <td style="width: 200px">${fieldValue(bean: empresaInstance, field: "domicilio")}</td>
 
       <td>${fieldValue(bean: empresaInstance, field: "rif")}</td>
 
