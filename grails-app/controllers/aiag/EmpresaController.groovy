@@ -86,6 +86,8 @@ class EmpresaController {
 
         [empresaInstance: empresaInstance]
     }
+    
+    @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def edit(Long id) {
         def empresaInstance = Empresa.get(id)
         if (!empresaInstance) {
@@ -126,6 +128,7 @@ class EmpresaController {
         redirect(action: "show", id: empresaInstance.id)
     }
 
+    @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def delete(Long id) {
         def empresaInstance = Empresa.get(id)
         if (!empresaInstance) {
@@ -187,4 +190,71 @@ class EmpresaController {
         }
         render("bulk index started in a background thread")
     }
+    
+    
+    
+       def listProveedores(Integer max) {
+        println params
+        def fecha = new Date()
+        params.sort = "nombre"
+        params.order = "asc"
+        params.max = Math.min(max ?: 10, 100)
+        if(!params.max) params.max = 10
+        if(params?.format && params.format != "html"){
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=empresasProveedoras${fecha.format('dd-MM-yyyy')}.${params.extension}")
+
+            List fields = ["nombre", "email","tel1"]
+            Map labels = ["nombre":"Nombre", "email":"Correo","tel1":"Tlf. 1"]
+
+            // Formatter closure
+            def upperCase = { domain, value ->
+                return value.toUpperCase()
+            }
+
+            Map formatters = [nombre: upperCase]		
+            Map parameters = [title: "AIAG. Listado de Proveedores", "column.widths": [0.3, 0.2, 0.3]]
+                def tipo = TipoEmpresa.findByNombre("Proveedora")         
+           // Empresa.list(sort:'nombre',order:'asc')
+            exportService.export(params.format, response.outputStream, Empresa.findAllByTipo(tipo,params), fields, labels, formatters, parameters)
+        }
+        def tipo = TipoEmpresa.findByNombre("Proveedora")
+        def proveedores=Empresa.findAllByTipo(tipo,params)
+        [empresaInstanceList: proveedores, empresaInstanceTotal: proveedores.size()]
+    }
+    
+    
+    
+    def listImpresores(Integer max) {
+        println params
+        def fecha = new Date()
+        params.sort = "nombre"
+        params.order = "asc"
+        params.max = Math.min(max ?: 10, 100)
+        if(!params.max) params.max = 10
+        if(params?.format && params.format != "html"){
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=empresasImpresoras${fecha.format('dd-MM-yyyy')}.${params.extension}")
+
+            List fields = ["nombre", "email","tel1"]
+            Map labels = ["nombre":"Nombre", "email":"Correo","tel1":"Tlf. 1"]
+
+            // Formatter closure
+            def upperCase = { domain, value ->
+                return value.toUpperCase()
+            }
+
+            Map formatters = [nombre: upperCase]		
+            Map parameters = [title: "AIAG. Listado de Impresores", "column.widths": [0.3, 0.2, 0.3]]
+                def tipo = TipoEmpresa.findByNombre("Impresora")         
+           // Empresa.list(sort:'nombre',order:'asc')
+            exportService.export(params.format, response.outputStream, Empresa.findAllByTipo(tipo,params), fields, labels, formatters, parameters)
+        }
+        def tipo = TipoEmpresa.findByNombre("Impresora")
+        def proveedores=Empresa.findAllByTipo(tipo,params)
+        println Empresa.findAllByTipo(tipo,params)
+        [empresaInstanceList: proveedores, empresaInstanceTotal: proveedores.size()]
+    }
+    
 }
+

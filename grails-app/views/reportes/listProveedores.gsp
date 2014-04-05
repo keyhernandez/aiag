@@ -1,5 +1,5 @@
 
-<%@ page import="aiag.Empresa" %>
+
 <!DOCTYPE html>
 <html>
   <head>

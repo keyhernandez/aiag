@@ -1,5 +1,5 @@
-
 <%@ page import="aiag.Empresa" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,13 +33,13 @@
 
     <g:sortableColumn property="nombre" title="${message(code: 'empresa.nombre.label', default: 'Nombre')}" style="width: 200px"/>
 
-    <g:sortableColumn property="tipo" title="${message(code: 'empresa.tipo.label', default: 'Tipo')}" />
+  <g:sortableColumn property="email" title="${message(code: 'empresa.email.label', default: 'Email')}" />
 
    <g:sortableColumn property="tel1" title="${message(code: 'empresa.tel1.label', default: 'Tlf.1')}" />
 
     
 
-    <g:sortableColumn property="email" title="${message(code: 'empresa.email.label', default: 'Email')}" />
+   
 
 
 
@@ -53,13 +53,13 @@
 
         <td><g:link action="show" id="${empresaInstance.id}">${fieldValue(bean: empresaInstance, field: "nombre")}</g:link></td>
 
-      <td>${fieldValue(bean: empresaInstance, field: "tipo")}</td>
+       <td>${fieldValue(bean: empresaInstance, field: "email")}</td>
 
       
 
       <td>${fieldValue(bean: empresaInstance, field: "tel1")}</td>
       
-      <td>${fieldValue(bean: empresaInstance, field: "email")}</td>
+   
 
 
 
