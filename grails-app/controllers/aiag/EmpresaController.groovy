@@ -199,7 +199,7 @@ class EmpresaController {
         params.sort = "nombre"
         params.order = "asc"
         params.max = Math.min(max ?: 10, 100)
-        if(!params.max) params.max = 10
+   //     if(!params.max) params.max = 10
         if(params?.format && params.format != "html"){
             response.contentType = grailsApplication.config.grails.mime.types[params.format]
             response.setHeader("Content-disposition", "attachment; filename=empresasProveedoras${fecha.format('dd-MM-yyyy')}.${params.extension}")
@@ -220,6 +220,7 @@ class EmpresaController {
         }
         def tipo = TipoEmpresa.findByNombre("Proveedora")
         def proveedores=Empresa.findAllByTipo(tipo,params)
+         println proveedores.size()
         [empresaInstanceList: proveedores, empresaInstanceTotal: proveedores.size()]
     }
     
@@ -248,12 +249,14 @@ class EmpresaController {
             Map parameters = [title: "AIAG. Listado de Impresores", "column.widths": [0.3, 0.2, 0.3]]
                 def tipo = TipoEmpresa.findByNombre("Impresora")         
            // Empresa.list(sort:'nombre',order:'asc')
-            exportService.export(params.format, response.outputStream, Empresa.findAllByTipo(tipo,params), fields, labels, formatters, parameters)
+            exportService.export(params.format, response.outputStream, Empresa.findAllByTipo(tipo), fields, labels, formatters, parameters)
         }
         def tipo = TipoEmpresa.findByNombre("Impresora")
+        println params
         def proveedores=Empresa.findAllByTipo(tipo,params)
-        println Empresa.findAllByTipo(tipo,params)
-        [empresaInstanceList: proveedores, empresaInstanceTotal: proveedores.size()]
+        def count=Empresa.findAllByTipo(tipo).size()
+        println proveedores.size()
+        [empresaInstanceList: proveedores, empresaInstanceTotal: count]
     }
     
 }

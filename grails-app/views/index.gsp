@@ -135,6 +135,13 @@ display: none;
     </sec:ifLoggedIn>
           <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Empresa',action:'index')}">
             Consultar Datos de Empresas
+          </a> </br>
+     <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Empresa',action:'listImpresores')}">
+            Listado de Empresas Impresoras
+          </a>
+          </br>
+     <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Empresa',action:'listProveedores')}">
+            Listado de Empresas Proveedoras
           </a>
         </ul>
       </div>
