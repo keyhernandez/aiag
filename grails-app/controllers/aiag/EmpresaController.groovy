@@ -165,7 +165,7 @@ class EmpresaController {
             redirect(action: "list")
             return
         }
-        println "aqui vine"
+   
         [personaInstance: personaInstance]
     }
     
@@ -258,6 +258,8 @@ class EmpresaController {
         println proveedores.size()
         [empresaInstanceList: proveedores, empresaInstanceTotal: count]
     }
+    
+    
     
 }
 

@@ -97,15 +97,17 @@ class PersonaController {
         params.sort = "empresa.nombre"
         params.order = "asc"
         params.max = Math.min(max ?: 10, 100)
-        
+         def fecha = new Date()
         if(!params.max) params.max = 10
         if(params?.format && params.format != "html"){
             response.contentType = grailsApplication.config.grails.mime.types[params.format]
-            response.setHeader("Content-disposition", "attachment; filename=PersonasContacto.${params.extension}")
-
+            response.setHeader("Content-disposition", "attachment; filename=PersonasContacto${fecha.format('dd-MM-yyyy')}.${params.extension}")
+ def nombrecompleto = { domain, value ->
+				return domain?.author + ": " + domain?.title
+			}
             
-            List fields = ["empresa","nombre","apellido","email","cargo"]
-            Map labels = ["empresa":"Empresa","nombre":"Nombre","apellido":"Apellido","email":"Correo","cargo":"Cargo"]
+            List fields = ["empresa","cargo","nombre","apellido","telefono","email"]
+            Map labels = ["empresa":"Empresa","cargo":"Cargo","nombre":"Nombre","apellido":"Apellido","telefono":"Telefono","email":"Correo"]
 
 
 
@@ -115,7 +117,7 @@ class PersonaController {
             }
 
             Map formatters = [nombre: upperCase]		
-            Map parameters = [title: "AIAG. Personas de Contacto", "column.widths": [0.2, 0.1, 0.1,0.2,0.2]]
+            Map parameters = [title: "AIAG. Personas de Contacto", "column.widths": [0.2, 0.2, 0.1,0.1,0.1,0.2]]
                         
             
             exportService.export(params.format, response.outputStream, Persona.list(sort:"empresa.nombre",order:"asc"), fields, labels, formatters, parameters)

@@ -25,15 +25,17 @@
 				<thead>
 					<tr>
 					
-						
+							<th><g:message code="persona.empresa.label" default="Empresa" /></th>
+                                                        
+                                                         <th><g:message code="persona.cargo.label" default="Cargo" /></th>
 					
-						<g:sortableColumn property="apellido" title="${message(code: 'persona.apellido.label', default: 'Apellido')}" />
+					
 					
                                                 <g:sortableColumn property="nombre" title="${message(code: 'persona.nombre.label', default: 'Nombre')}" />
                                                 
-                                               	<th><g:message code="persona.empresa.label" default="Empresa" /></th>
+                                               
                                                 
-                                                <th><g:message code="persona.cargo.label" default="Cargo" /></th>
+                                               
 					
 						<g:sortableColumn property="telefono" title="${message(code: 'persona.telefono.label', default: 'Telefono')}" />
                                                 
@@ -50,15 +52,13 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						
-					
-						<td><g:link action="show" id="${personaInstance.id}">${fieldValue(bean: personaInstance, field: "apellido")}</g:link></td>
-					
-						<td>${fieldValue(bean: personaInstance, field: "nombre")}</td>
-                                                
-                                                <td>${fieldValue(bean: personaInstance, field: "empresa")}</td>
-                                                
-                                                <td>${fieldValue(bean: personaInstance, field: "cargo")}</td>
-                                                
+					    <td>${fieldValue(bean: personaInstance, field: "empresa")}</td>
+                                            
+                                              <td>${fieldValue(bean: personaInstance, field: "cargo")}</td>
+                                              
+                                      
+						<td><g:link action="show" id="${personaInstance.id}">${fieldValue(bean: personaInstance, field: "nombre")} ${fieldValue(bean: personaInstance, field: "apellido")}</g:link></td>
+					  
                                                 <td>${fieldValue(bean: personaInstance, field: "telefono")}</td>
 
 						<td>${fieldValue(bean: personaInstance, field: "email")}</td>

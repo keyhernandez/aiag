@@ -133,15 +133,24 @@ display: none;
             Ingresar Datos de Empresa
           </a> <br>
     </sec:ifLoggedIn>
+    
+     
+      <p></p>
           <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Empresa',action:'index')}">
             Consultar Datos de Empresas
           </a> </br>
+          
+           <h1>Reportes</h1></br>
      <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Empresa',action:'listImpresores')}">
             Listado de Empresas Impresoras
           </a>
           </br>
      <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Empresa',action:'listProveedores')}">
             Listado de Empresas Proveedoras
+          </a>
+          </br>
+     <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Persona',action:'list')}">
+            Listado de Empresas con Cargos
           </a>
         </ul>
       </div>
