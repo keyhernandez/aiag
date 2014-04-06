@@ -216,12 +216,12 @@ class EmpresaController {
             Map parameters = [title: "AIAG. Listado de Proveedores", "column.widths": [0.3, 0.2, 0.3]]
                 def tipo = TipoEmpresa.findByNombre("Proveedora")         
            // Empresa.list(sort:'nombre',order:'asc')
-            exportService.export(params.format, response.outputStream, Empresa.findAllByTipo(tipo,params), fields, labels, formatters, parameters)
+            exportService.export(params.format, response.outputStream, Empresa.findAllByTipo(tipo,[sort:'nombre',order:'asc']), fields, labels, formatters, parameters)
         }
         def tipo = TipoEmpresa.findByNombre("Proveedora")
         def proveedores=Empresa.findAllByTipo(tipo,params)
-         println proveedores.size()
-        [empresaInstanceList: proveedores, empresaInstanceTotal: proveedores.size()]
+         def count=Empresa.findAllByTipo(tipo).size()
+        [empresaInstanceList: proveedores, empresaInstanceTotal: count]
     }
     
     
@@ -249,7 +249,7 @@ class EmpresaController {
             Map parameters = [title: "AIAG. Listado de Impresores", "column.widths": [0.3, 0.2, 0.3]]
                 def tipo = TipoEmpresa.findByNombre("Impresora")         
            // Empresa.list(sort:'nombre',order:'asc')
-            exportService.export(params.format, response.outputStream, Empresa.findAllByTipo(tipo), fields, labels, formatters, parameters)
+            exportService.export(params.format, response.outputStream, Empresa.findAllByTipo(tipo,[sort:'nombre',order:'asc']), fields, labels, formatters, parameters)
         }
         def tipo = TipoEmpresa.findByNombre("Impresora")
         println params
