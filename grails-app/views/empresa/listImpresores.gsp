@@ -6,7 +6,7 @@
     <meta name="layout" content="main">
   <r:require module="export"/>
   <g:set var="entityName" value="${message(code: 'empresa.label', default: 'Empresa')}" />
-  <title>Empresas</title>
+  <title>Empresas Impresoras</title>
 </head>
 <body>
   <a href="#list-empresa" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -23,10 +23,11 @@
   </div>
 
 <div id="list-empresa" class="content scaffold-list" role="main">
-  <h1>Empresas</h1>
+  <h1>Empresas Impresoras</h1>
   <g:if test="${flash.message}">
     <div class="message" role="status">${flash.message}</div>
   </g:if>
+   <export:formats formats="['excel','pdf']" />
   <table>
     <thead>
       <tr>
@@ -36,14 +37,6 @@
   <g:sortableColumn property="email" title="${message(code: 'empresa.email.label', default: 'Email')}" />
 
    <g:sortableColumn property="tel1" title="${message(code: 'empresa.tel1.label', default: 'Tlf.1')}" />
-
-    
-
-   
-
-
-
-    
 
     </tr>
     </thead>
@@ -58,12 +51,6 @@
       
 
       <td>${fieldValue(bean: empresaInstance, field: "tel1")}</td>
-      
-   
-
-
-
-
       </tr>
     </g:each>
     </tbody>
@@ -71,7 +58,7 @@
   <div class="pagination">
     <g:paginate total="${empresaInstanceTotal}" />
   </div>
-  <export:formats formats="['excel','pdf']" />
+
 </div>
 </body>
 </html>

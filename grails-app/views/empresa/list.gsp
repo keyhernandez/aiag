@@ -27,6 +27,7 @@
   <g:if test="${flash.message}">
     <div class="message" role="status">${flash.message}</div>
   </g:if>
+   <export:formats formats="['excel','pdf']" />
   <table>
     <thead>
       <tr>
@@ -71,7 +72,7 @@
   <div class="pagination">
     <g:paginate total="${empresaInstanceTotal}" />
   </div>
-  <export:formats formats="['excel','pdf']" />
+ 
 </div>
 </body>
 </html>
