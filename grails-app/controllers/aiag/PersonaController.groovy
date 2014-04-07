@@ -92,7 +92,7 @@ class PersonaController {
         }
         [empresaInstance: empresa,op:params.op]
     }
-     @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
+    
     def list(Integer max) {
         params.sort = "empresa.nombre"
         params.order = "asc"

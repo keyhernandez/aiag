@@ -192,7 +192,7 @@ class EmpresaController {
     }
     
     
-     @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
+     
        def listProveedores(Integer max) {
         println params
         def fecha = new Date()
@@ -225,7 +225,7 @@ class EmpresaController {
     }
     
     
-     @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
+    
     def listImpresores(Integer max) {
         println params
         def fecha = new Date()
