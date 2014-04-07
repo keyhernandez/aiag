@@ -92,7 +92,7 @@ class PersonaController {
         }
         [empresaInstance: empresa,op:params.op]
     }
-    
+     @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
     def list(Integer max) {
         params.sort = "empresa.nombre"
         params.order = "asc"
@@ -194,7 +194,7 @@ class PersonaController {
         flash.message = "Persona actualizada"
         redirect(action: "show", id: personaInstance.id)
     }
-
+ @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
     def delete(Long id) {
         def personaInstance = Persona.get(id)
         if (!personaInstance) {

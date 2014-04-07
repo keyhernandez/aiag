@@ -152,6 +152,11 @@ display: none;
      <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Persona',action:'list')}">
             Listado de Empresas con Cargos
           </a>
+    
+     </br>
+     <a style="color: black; display:block;" class="boton"  title="" href="${createLink(controller:'Empresa',action:'listNroEmpleados')}">
+            Listado de Empresas con Números de Empleados
+          </a>
         </ul>
       </div>
     </div>

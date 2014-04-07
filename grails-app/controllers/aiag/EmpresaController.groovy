@@ -192,7 +192,7 @@ class EmpresaController {
     }
     
     
-    
+     @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
        def listProveedores(Integer max) {
         println params
         def fecha = new Date()
@@ -225,7 +225,7 @@ class EmpresaController {
     }
     
     
-    
+     @Secured(['ROLE_ADMIN','ROLE_SUPERUSER'])
     def listImpresores(Integer max) {
         println params
         def fecha = new Date()
@@ -260,6 +260,39 @@ class EmpresaController {
     }
     
     
-    
+    def listNroEmpleados(Integer max) {
+        println params
+        params.sort = "nombre"
+        params.order = "asc"
+        params.max = Math.min(max ?: 10, 100)
+        if(!params.max) params.max = 10
+        if(params?.format && params.format != "html"){
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=empresasEmpleados.${params.extension}")
+
+            List fields = ["nombre", "obreros","administrativos"]
+            Map labels = ["nombre":"Nombre", "obreros":"Nro. Empleados Obreros","administrativos":"Nro. Empleados Administrativos"]
+
+
+            /* Formatter closure in previous releases
+            def upperCase = { value ->
+            return value.toUpperCase()
+            }
+             */
+
+            // Formatter closure
+            def upperCase = { domain, value ->
+                return value.toUpperCase()
+            }
+
+            Map formatters = [nombre: upperCase]		
+            Map parameters = [title: "AIAG. Listado de Empresas con Numero de Empleados", "column.widths": [0.4, 0.2, 0.2]]
+                        
+            
+            exportService.export(params.format, response.outputStream, Empresa.list(sort:'nombre',order:'asc'), fields, labels, formatters, parameters)
+        }
+        
+        [empresaInstanceList: Empresa.list(params), empresaInstanceTotal: Empresa.count()]
+    }
 }
 
